@@ -1,10 +1,10 @@
 package stringcalculator;
 
-import java.util.List;
+import stringcalculator.operator.Operator;
 
 public class ExpressionValidator {
 
-    private final static String[] operators = {"+", "-", "*", "/"};
+//    private final static String[] operators = {"+", "-", "*", "/"};
 
     private ExpressionValidator() {
     }
@@ -50,10 +50,8 @@ public class ExpressionValidator {
         }
     }
 
-    private static void validateOperator(String operator) {
-        List<String> operators = List.of(ExpressionValidator.operators);
-        if (!operators.contains(operator)) {
-            throw new IllegalArgumentException("처리할 수 없는 연산자입니다.");
-        }
+    private static void validateOperator(String value) {
+        Operator.findByValue(value)
+                .orElseThrow(() -> new IllegalArgumentException("처리할 수 없는 연산자입니다"));
     }
 }
