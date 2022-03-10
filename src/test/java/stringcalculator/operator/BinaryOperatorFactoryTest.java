@@ -21,15 +21,15 @@ class BinaryOperatorFactoryTest {
 
     @DisplayName("Operator 에 없는 연산자를 통해 BinaryOperator 생성 시도시 예외")
     @Test
-    void exception_WhenCreatingOperatorWithUnknownOperator() {
+    void create_Throw_WhenCreatingOperatorWithUnknownOperator() {
         assertThatThrownBy(() -> {
             BinaryOperatorFactory.create(1, 1, "^");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("0 으로 나누는 연산자 생성 시도시 예외")
+    @DisplayName("0 으로 나누는 BinaryOperator 생성 시도시 예외")
     @Test
-    void exception_WhenCreatingDivideOperatorWithZeroOperand() {
+    void create_Throw_WhenCreatingDivideOperatorWithZeroOperand() {
         int operand1 = 1;
         int operand2 = 0;
 

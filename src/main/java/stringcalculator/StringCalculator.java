@@ -6,6 +6,8 @@ import java.util.List;
 
 public class StringCalculator {
 
+    private StringCalculator() {
+    }
     public static int execute(String expression) {
         ExpressionValidator.validate(expression);
         Tokens tokens = transform(expression);

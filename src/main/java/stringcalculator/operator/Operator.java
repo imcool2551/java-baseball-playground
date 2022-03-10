@@ -9,7 +9,7 @@ public enum Operator {
     PRODUCT("*"),
     DIVIDE("/");
 
-    private String value;
+    private final String value;
 
     Operator(String value) {
         this.value = value;

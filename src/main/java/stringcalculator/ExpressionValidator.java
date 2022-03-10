@@ -4,8 +4,6 @@ import stringcalculator.operator.Operator;
 
 public class ExpressionValidator {
 
-//    private final static String[] operators = {"+", "-", "*", "/"};
-
     private ExpressionValidator() {
     }
 
