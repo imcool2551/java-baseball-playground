@@ -1,31 +1,38 @@
 package stringcalculator;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 public class StringCalculator {
+    private Tokens tokens;
 
-    private StringCalculator() {
-    }
-    public static int execute(String expression) {
+    public StringCalculator(String expression) {
         ExpressionValidator.validate(expression);
-        Tokens tokens = transform(expression);
-        return calculate(tokens);
+        this.tokens = transform(expression);
     }
 
-    private static Tokens transform(String expression) {
+    private Tokens transform(String expression) {
         String[] tokenArray = expression.trim().split(" ");
-        List<String> tokenList = new LinkedList<>(Arrays.asList(tokenArray));
+        List<String> tokenList = new LinkedList<>(List.of(tokenArray));
         return new Tokens(tokenList);
     }
 
-    private static int calculate(Tokens tokens) {
-        while (tokens.size() > 1) {
-            tokens.calculateFirstThree();
+    public int calculate() {
+        while (onProcess()) {
+            int operand1 = Integer.parseInt(tokens.get(0));
+            int operand2 = Integer.parseInt(tokens.get(2));
+
+            String symbol = tokens.get(1);
+            Operator operator = Operator.findOperatorBySymbol(symbol);
+
+            int result = operator.calculate(operand1, operand2);
+            tokens.replaceFirstThreeWith(result);
         }
 
-        return tokens.result();
+        return Integer.parseInt(tokens.get(0));
     }
 
+    private boolean onProcess() {
+        return tokens.size() >= 3;
+    }
 }

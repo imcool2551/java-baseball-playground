@@ -7,10 +7,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class StringCalculatorTest {
 
+
     @ParameterizedTest
     @CsvSource(value = {"1 + 2 * 3 / 3 = 3"}, delimiter = '=')
-    void execute(String expression, int result) {
-        assertThat(StringCalculator.execute(expression))
+    void calculate(String expression, int result) {
+        StringCalculator calculator = new StringCalculator(expression);
+
+        assertThat(calculator.calculate())
                 .isEqualTo(result);
     }
 }

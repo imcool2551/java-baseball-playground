@@ -1,6 +1,7 @@
 package stringcalculator;
 
-import stringcalculator.operator.Operator;
+import stringcalculator.exception.EvenSizedExpressionException;
+import stringcalculator.exception.InvalidOperandException;
 
 public class ExpressionValidator {
 
@@ -20,7 +21,7 @@ public class ExpressionValidator {
 
     private static void validateSize(String[] tokens) {
         if (tokens.length % 2 == 0) {
-            throw new IllegalArgumentException("잘못된 계산식입니다.");
+            throw new EvenSizedExpressionException();
         }
     }
 
@@ -32,13 +33,13 @@ public class ExpressionValidator {
 
     private static void validateOperand(String operand) {
         if (operand == null || operand.isBlank()) {
-            throw new IllegalArgumentException("처리할 수 없는 피연산자입니다.");
+            throw new InvalidOperandException();
         }
 
         try {
             Integer.parseInt(operand);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("처리할 수 없는 피연산자입니다.");
+            throw new InvalidOperandException();
         }
     }
 
@@ -48,8 +49,7 @@ public class ExpressionValidator {
         }
     }
 
-    private static void validateOperator(String value) {
-        Operator.findByValue(value)
-                .orElseThrow(() -> new IllegalArgumentException("처리할 수 없는 연산자입니다"));
+    private static void validateOperator(String symbol) {
+        Operator.findOperatorBySymbol(symbol);
     }
 }

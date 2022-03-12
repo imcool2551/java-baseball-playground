@@ -1,6 +1,9 @@
 package stringcalculator;
 
 import org.junit.jupiter.api.Test;
+import stringcalculator.exception.EvenSizedExpressionException;
+import stringcalculator.exception.InvalidOperandException;
+import stringcalculator.exception.OperatorNotFoundException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -21,22 +24,20 @@ class ExpressionValidatorTest {
 
     @Test
     void validate_Throw_WhenInvalidExpression() {
-        String expression1 = "1 + ";
-        String expression2 = "1 + 2.0";
+        String expression = "1 +";
 
         assertThatThrownBy(() -> {
-            ExpressionValidator.validate(expression1);
-            ExpressionValidator.validate(expression2);
-        }).isInstanceOf(IllegalArgumentException.class);
+            ExpressionValidator.validate(expression);
+        }).isInstanceOf(EvenSizedExpressionException.class);
     }
 
     @Test
     void validate_Throw_WhenInvalidOperand() {
-        String expression = "1 + x";
+        String expression = "1 + 2 + x";
 
         assertThatThrownBy(() -> {
             ExpressionValidator.validate(expression);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(InvalidOperandException.class);
     }
 
     @Test
@@ -45,6 +46,6 @@ class ExpressionValidatorTest {
 
         assertThatThrownBy(() -> {
             ExpressionValidator.validate(expression);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(OperatorNotFoundException.class);
     }
 }
