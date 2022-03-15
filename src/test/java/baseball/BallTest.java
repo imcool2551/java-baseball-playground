@@ -29,21 +29,21 @@ public class BallTest {
     }
 
     @Test
-    void 공_테스트_스트라이크() {
+    void 스트라이크() {
         Ball anotherBall = new Ball(1, 1);
 
         assertThat(ball.test(anotherBall)).isEqualTo(BallStatus.STRIKE);
     }
 
     @Test
-    void 공_테스트_볼() {
+    void 볼() {
         Ball anotherBall = new Ball(2, 1);
 
         assertThat(ball.test(anotherBall)).isEqualTo(BallStatus.BALL);
     }
 
     @Test
-    void 공_테스트_나띵() {
+    void 나띵() {
         Ball anotherBall = new Ball(2, 2);
 
         assertThat(ball.test(anotherBall)).isEqualTo(BallStatus.NOTHING);

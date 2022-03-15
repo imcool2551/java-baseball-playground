@@ -14,29 +14,29 @@ public class Ball {
         this.number = number;
     }
 
-    public BallStatus test(Ball ball) {
-        if (this.equals(ball)) {
-            return BallStatus.STRIKE;
-        }
-
-        if (isBall(ball)) {
-            return BallStatus.BALL;
-        }
-
-        return BallStatus.NOTHING;
-    }
-
-    private boolean isBall(Ball ball) {
-        return getNumber() == ball.getNumber() &&
-                getPosition() != ball.getPosition();
-    }
-
     public int getPosition() {
         return position;
     }
 
     public int getNumber() {
         return number;
+    }
+
+    public BallStatus test(Ball anotherBall) {
+        if (this.equals(anotherBall)) {
+            return BallStatus.STRIKE;
+        }
+
+        if (checkIfBallWith(anotherBall)) {
+            return BallStatus.BALL;
+        }
+
+        return BallStatus.NOTHING;
+    }
+
+    private boolean checkIfBallWith(Ball anotherBall) {
+        return getNumber() == anotherBall.getNumber() &&
+                getPosition() != anotherBall.getPosition();
     }
 
     @Override
