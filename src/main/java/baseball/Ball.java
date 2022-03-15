@@ -4,21 +4,19 @@ import java.util.Objects;
 
 public class Ball {
 
-    private final int position;
-    private final int number;
+    private final BallPosition position;
+    private final BallNumber number;
 
-    public Ball(int position, int number) {
-        ValidationUtils.validateRange(position, 1, 3);
-        ValidationUtils.validateRange(number, 1, 9);
-        this.position = position;
-        this.number = number;
+    public Ball(int position, int no) {
+        this.position = new BallPosition(position);
+        this.number = new BallNumber(no);
     }
 
-    public int getPosition() {
+    public BallPosition getPosition() {
         return position;
     }
 
-    public int getNumber() {
+    public BallNumber getNumber() {
         return number;
     }
 
@@ -35,8 +33,9 @@ public class Ball {
     }
 
     private boolean checkIfBallWith(Ball anotherBall) {
-        return getNumber() == anotherBall.getNumber() &&
-                getPosition() != anotherBall.getPosition();
+        boolean numberMatch = getNumber().equals(anotherBall.getNumber());
+        boolean positionMatch = getPosition().equals(anotherBall.getPosition());
+        return numberMatch && !positionMatch;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class Ball {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ball ball = (Ball) o;
-        return position == ball.position && number == ball.number;
+        return Objects.equals(position, ball.position) && Objects.equals(number, ball.number);
     }
 
     @Override

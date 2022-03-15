@@ -19,37 +19,49 @@ public class BallsTest {
     }
 
     @Test
-    void 볼즈_생성_성공() {
+    void 생성_성공() {
         assertDoesNotThrow(() -> {
             new Balls(List.of(1, 2, 3));
         });
     }
 
     @Test
-    void 볼즈_생성_실패() {
+    void 생성_실패() {
         assertThatThrownBy(() -> {
             new Balls(List.of(1, 2));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
-    void 단일_스트라이크() {
-        BallStatus status = balls.test(new Ball(1, 1));
+    void 스트라이크0_볼0() {
+        TestResult result = balls.test(List.of(4, 5, 6));
 
-        assertThat(status).isEqualTo(BallStatus.STRIKE);
+        assertThat(result.getStrikes()).isEqualTo(0);
+        assertThat(result.getBalls()).isEqualTo(0);
     }
 
     @Test
-    void 단일_볼() {
-        BallStatus status = balls.test(new Ball(2, 1));
+    void 스트라이크1_볼0() {
+        TestResult result = balls.test(List.of(1, 5, 6));
 
-        assertThat(status).isEqualTo(BallStatus.BALL);
+        assertThat(result.getStrikes()).isEqualTo(1);
+        assertThat(result.getBalls()).isEqualTo(0);
     }
 
     @Test
-    void 단일_나띵() {
-        BallStatus status = balls.test(new Ball(1, 4));
+    void 스트라이크0_볼1() {
+        TestResult result = balls.test(List.of(4, 5, 1));
 
-        assertThat(status).isEqualTo(BallStatus.NOTHING);
+        assertThat(result.getStrikes()).isEqualTo(0);
+        assertThat(result.getBalls()).isEqualTo(1);
+    }
+
+    @Test
+    void 스트라이크3() {
+        TestResult result = balls.test(List.of(1, 2, 3));
+
+        assertThat(result.getStrikes()).isEqualTo(3);
+        assertThat(result.getBalls()).isEqualTo(0);
+        assertThat(result.isGameOver()).isTrue();
     }
 }

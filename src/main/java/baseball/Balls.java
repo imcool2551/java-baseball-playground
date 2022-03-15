@@ -25,7 +25,19 @@ public class Balls {
         return balls;
     }
 
-    public BallStatus test(Ball anotherBall) {
+    public TestResult test(List<Integer> submits) {
+        TestResult result = new TestResult();
+        Balls userBalls = new Balls(submits);
+
+        for (Ball ball : balls) {
+            BallStatus status = userBalls.test(ball);
+            result.report(status);
+        }
+
+        return result;
+    }
+
+    private BallStatus test(Ball anotherBall) {
         return balls.stream()
                 .map(ball -> ball.test(anotherBall))
                 .filter(BallStatus::isNotNothing)

@@ -2,13 +2,8 @@ package baseball;
 
 public class TestResult {
 
-    private final int strikes;
-    private final int balls;
-
-    public TestResult(int strikes, int balls) {
-        this.strikes = strikes;
-        this.balls = balls;
-    }
+    private int strikes;
+    private int balls;
 
     public int getStrikes() {
         return strikes;
@@ -16,5 +11,19 @@ public class TestResult {
 
     public int getBalls() {
         return balls;
+    }
+
+    public void report(BallStatus status) {
+        if (status.isStrike()) {
+            strikes += 1;
+        }
+
+        if (status.isBall()) {
+            balls += 1;
+        }
+    }
+
+    public boolean isGameOver() {
+        return strikes == 3;
     }
 }
