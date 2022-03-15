@@ -1,5 +1,7 @@
 package baseball;
 
+import baseball.domain.Ball;
+import baseball.domain.BallStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

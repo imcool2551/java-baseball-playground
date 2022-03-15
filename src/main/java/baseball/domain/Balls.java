@@ -1,19 +1,15 @@
-package baseball;
+package baseball.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 1, 1     2, 2,     3,3
- * 2, 2 -> STRIKE
- * 2, 3 -> BALL
- * 2, 7 -> NOTHING
- */
 public class Balls {
 
     private final List<Ball> balls;
     public Balls(List<Integer> numbers) {
-        ValidationUtils.validateMatch(numbers.size(), 3);
+        if (numbers.size() != 3) {
+            throw new IllegalArgumentException("볼의 길이는 3이어야 합니다");
+        }
         this.balls = mapNumbersToBalls(numbers);
     }
 

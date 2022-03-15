@@ -1,4 +1,4 @@
-package baseball;
+package baseball.domain;
 
 public class TestResult {
 
@@ -25,5 +25,17 @@ public class TestResult {
 
     public boolean isGameOver() {
         return strikes == 3;
+    }
+
+    private boolean isNothing() {
+        return getBalls() == 0 && getStrikes() == 0;
+    }
+
+    @Override
+    public String toString() {
+        if (isNothing()) {
+            return "NOTHING";
+        }
+        return balls + "볼 " + strikes + "스트라이크";
     }
 }
